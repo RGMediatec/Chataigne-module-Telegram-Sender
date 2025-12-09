@@ -4,7 +4,7 @@
   "path": "Network",
   
   "version": "1.0.0",
-  "description": "Sends text and photos via Telegram Bot API to group chat",
+  "description": "Sends Text and Photos via Telegram Bot API.",
   
   "url":"https://github.com/RGMediatec/Chataigne-module-Telegram-Sender",
   "downloadURL":"https://github.com/RGMediatec/Chataigne-module-Telegram-Sender/archive/master.zip",
@@ -23,7 +23,7 @@
       "type": "String",
       "default": ""
     },
-    "Chat ID": {
+    "Group ID": {
       "type": "String",
       "default": ""
     }
@@ -34,7 +34,7 @@
   "commands": {
     "Send Text": {
       "label": "Send Text",
-      "description": "Send text message (optional MarkdownV2, optional Silent) to telegram group chat",
+      "description": "Textnachricht (optional MarkdownV2, optional Silent) an Telegram senden",
       "callback": "sendText",
       "parameters": {
         "Text": {
@@ -53,7 +53,7 @@
     },
     "Send Photo": {
       "label": "Send Photo",
-      "description": "Send local photo to telegram group chat",
+      "description": "Foto von lokalem Pfad senden",
       "callback": "sendPhoto",
       "parameters": {
         "File Path": {
