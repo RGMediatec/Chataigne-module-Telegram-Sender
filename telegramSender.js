@@ -6,7 +6,7 @@ function init()
 function getBotConfig()
 {
     var botTokenParam = local.parameters.getChild("Bot Token");
-    var chatIdParam   = local.parameters.getChild("Chat ID");
+    var groupIDParam   = local.parameters.getChild("Group ID");
 
     if (!botTokenParam)
     {
@@ -14,29 +14,29 @@ function getBotConfig()
         return null;
     }
 	
-    if (!chatIdParam)
+    if (!groupIDParam)
     {
-        script.log("[Telegram Sender] Parameter not found: Chat ID!");
+        script.log("[Telegram Sender] Parameter not found: Group ID!");
         return null;
     }
 
     var botToken = botTokenParam.get();
-    var chatId   = chatIdParam.get();
+    var groupID   = groupIDParam.get();
 
     if (!botToken || botToken === "")
     {
         script.log("[Telegram Sender] Bot Token not set!");
         return null;
     }
-    if (!chatId || chatId === "")
+    if (!groupID || groupID === "")
     {
-        script.log("[Telegram Sender] Chat ID not set!");
+        script.log("[Telegram Sender] Group ID not set!");
         return null;
     }
 
     return {
         botToken: botToken,
-        chatId:   chatId
+        groupID:   groupID
     };
 }
 
@@ -69,7 +69,7 @@ function sendText(text, silent, markdown)
     {
         local.sendPOST(
             fullAddress,
-            "chat_id", cfg.chatId,
+            "chat_id", cfg.groupID,
             "text",    text
         );
     }
@@ -78,7 +78,7 @@ function sendText(text, silent, markdown)
     {
         local.sendPOST(
             fullAddress,
-            "chat_id",              cfg.chatId,
+            "chat_id",              cfg.groupID,
             "text",                 text,
             "disable_notification", "true"
         );
@@ -88,7 +88,7 @@ function sendText(text, silent, markdown)
     {
         local.sendPOST(
             fullAddress,
-            "chat_id",    cfg.chatId,
+            "chat_id",    cfg.groupID,
             "text",       text,
             "parse_mode", "MarkdownV2"
         );
@@ -98,7 +98,7 @@ function sendText(text, silent, markdown)
     {
         local.sendPOST(
             fullAddress,
-            "chat_id",              cfg.chatId,
+            "chat_id",              cfg.groupID,
             "text",                 text,
             "parse_mode",           "MarkdownV2",
             "disable_notification", "true"
@@ -124,7 +124,7 @@ function sendPhoto(filePath, silent)
     if (!cfg) return;
 
     // URL für sendPhoto – chat_id in der Query, optional disable_notification
-    var urlSuffix = "bot" + cfg.botToken + "/sendPhoto?chat_id=" + cfg.chatId;
+    var urlSuffix = "bot" + cfg.botToken + "/sendPhoto?chat_id=" + cfg.groupID;
 
     if (silent)
     {
