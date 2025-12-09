@@ -1,65 +1,68 @@
 {
-  "name":"My custom module",
-  "type":"OSC",
-  "path":"Custom",
+  "name": "Telegram Sender",
+  "type": "HTTP",
+  "path": "Network",
   
-  "version":"1.0.0",
-  "description":"My module description",
-  "url":"https://github.com/tommag/Sample-Chataigne-module",
-  "downloadURL":"https://github.com/tommag/Sample-Chataigne-module/archive/master.zip",
-
-  "hasInput":true,
-  "hasOutput":true, 
-
+  "version": "1.0.0",
+  "description": "Sends text and photos via Telegram Bot API to group chat",
+  
+  "url":"https://github.com/RGMediatec/Chataigne-module-Telegram-Sender",
+  "downloadURL":"https://github.com/RGMediatec/Chataigne-module-Telegram-Sender/archive/master.zip",
+  
+  "hasInput": true,
+  "hasOutput": true,
+  
   "hideDefaultCommands":false,
   
-  "defaults":
-  {	
-    "autoAdd":false,
-    "oscInput":
-    {
-      "localPort":9001
-    }
+  "defaults": {
+    "baseAddress": "https://api.telegram.org/"
   },
 
-  "parameters":
-  {
-    "Module param":
-    {
-      "type":"Integer"
+  "parameters": {
+    "Bot Token": {
+      "type": "String",
+      "default": ""
+    },
+    "Chat ID": {
+      "type": "String",
+      "default": ""
     }
   },
-
-  "hideDefaultParameters": [ "autoAdd", "oscInput/localPort"],
-
-  "scripts": 
-  [
-    "moduleScript.js"
+  "scripts": [
+    "telegramSender.js"
   ],
-
-  "values":
-  {
-    "Module value":
-    {
-      "type":"Float"
-    }
-  },
-
-  "commands":
-  {
-    
-    "Custom command":
-    {
-      "menu":"",  
-      "callback":"customCmd",
-      "parameters":
-      {
-        "Value":
-        {
-          "type":"Integer",
-          "min":0,
-          "max":100,
-          "default":0
+  "commands": {
+    "Send Text": {
+      "label": "Send Text",
+      "description": "Send text message (optional MarkdownV2, optional Silent) to telegram group chat",
+      "callback": "sendText",
+      "parameters": {
+        "Text": {
+          "type": "String",
+          "default": ""
+        },
+        "Silent": {
+          "type": "Boolean",
+          "default": false
+        },
+        "Markdown": {
+          "type": "Boolean",
+          "default": true
+        }
+      }
+    },
+    "Send Photo": {
+      "label": "Send Photo",
+      "description": "Send local photo to telegram group chat",
+      "callback": "sendPhoto",
+      "parameters": {
+        "File Path": {
+          "type": "File",
+          "default": ""
+        },
+        "Silent": {
+          "type": "Boolean",
+          "default": false
         }
       }
     }
